@@ -41,15 +41,14 @@ else:
 			f = file(path,"wb")  
 			f.write(data)  
 			f.close()
+			set_desktop_background(os.getcwd() + "/"  + path)
 			pass
 		except Exception, e:
 			alert(e)
 			raise
 		else:
-			pass
-		finally:
-				set_desktop_background(os.getcwd() + "/"  + path)
-				alert("壁纸更换完成")
+			alert("壁纸更换完成")
+				
 			
 
 
