@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # this script will fetch girl picture on graphis.co (a website I see in V2ex) and save it in current directory
+# written by kururucn 2014-02-18 jvdajd@gmail.com 
+# http://kutopia.me
 import requests
 from bs4 import BeautifulSoup 
 import datetime
