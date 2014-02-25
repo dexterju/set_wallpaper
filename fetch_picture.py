@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import datetime
 import subprocess
 import os
+from hashlib import md5
 
 SCRIPT = """/usr/bin/osascript<<END
 tell application "Finder"
@@ -21,6 +22,14 @@ set alertResult to display alert "%s" ¬
     default button "知道了" 
 END"""
 
+def md5_file(file):
+	m = md5();
+	f = open(file,"rb")
+	m.update(f.read())
+	f.close
+	return  m.hexdigest()
+	
+
 def set_desktop_background(filename):
     subprocess.Popen(SCRIPT%filename, shell=True)
 def alert(message):
@@ -30,7 +39,7 @@ currenttime = str (datetime.date.today())
 path = currenttime + ".jpg"
 if os.path.exists(os.getcwd() + "/"  + path):
 	set_desktop_background(os.getcwd() + "/"  + path)
-	alert("今日图片已经抓取")
+	alert("今日图片已经抓取,图片保存在"+os.getcwd() + "/"  + path)
 else:
 		try:
 			r = requests.get("http://graphis.co")
@@ -42,6 +51,7 @@ else:
 			f.write(data)  
 			f.close()
 			set_desktop_background(os.getcwd() + "/"  + path)
+			print os.getcwd() + "/"  + path
 			pass
 		except Exception, e:
 			alert(e)
